@@ -1,0 +1,39 @@
+# Rust
+target/
+**/*.rs.bk
+debug/
+
+# Node
+node_modules/
+.npm/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Anchor
+.anchor/
+test-ledger/
+
+# Postgres
+postgres_data/
+
+# Tools & Binaries
+tools/
+*.exe
+*.dll
+
+# Submission Artifacts
+GoQuant_Assignment_Source_Code.zip
+
+# Misc
+*.log
+prepare_submission.ps1

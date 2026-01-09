@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WS Demo</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background: #667eea
+        }
+
+        h1 {
+            color: #fff
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            background: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer
+        }
+
+        #msg {
+            background: #fff;
+            padding: 10px;
+            margin-top: 10px;
+            height: 200px;
+            overflow-y: auto
+        }
+    </style>
+</head>
+
+<body>
+    <h1>GoQuant WebSocket</h1><button onclick="connect()">Connect</button><button
+        onclick="ws.send(JSON.stringify({type:'ping'}))">Ping</button>
+    <div id="msg"></div>
+    <script>let ws; function connect() { ws = new WebSocket('ws://127.0.0.1:8080/ws'); ws.onopen = () => log('Connected'); ws.onmessage = e => log('RX:' + e.data); ws.onclose = () => log('Closed') } function log(t) { document.getElementById('msg').innerHTML += t + '<br>' }</script>
+</body>
+
+</html>

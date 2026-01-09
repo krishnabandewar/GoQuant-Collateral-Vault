@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GoQuant WebSocket</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #667eea;
+            padding: 20px
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer
+        }
+
+        #messages {
+            background: #f0f0f0;
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            margin-top: 20px
+        }
+
+        .message {
+            padding: 8px;
+            margin: 5px 0;
+            font-family: monospace;
+            font-size: 12px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>GoQuant WebSocket Demo</h1>
+        <button onclick="connect()">Connect</button>
+        <button onclick="disconnect()">Disconnect</button>
+        <button onclick="sendPing()">Ping</button>
+        <div id="messages"></div>
+    </div>
+    <script>
+        let ws = null;
+        function connect() {
+            ws = new WebSocket('ws://127.0.0.1:8080/ws');
+            ws.onopen = () => addMsg('Connected');
+            ws.onmessage = (e) => addMsg('RX: ' + e.data);
+            ws.onclose = () => addMsg('Disconnected');
+        }
+        function disconnect() { if (ws) ws.close() }
+        function sendPing() { if (ws) ws.send('{"type":"ping"}') }
+        function addMsg(txt) {
+            const d = document.createElement('div');
+            d.className = 'message';
+            d.textContent = txt;
+            document.getElementById('messages').appendChild(d);
+        }
+    </script>
+</body>
+
+</html>
